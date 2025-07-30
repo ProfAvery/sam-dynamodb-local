@@ -34,7 +34,7 @@ Parameters:
     Type: String
     Description: Developer environment where code is being executed (OSX, Windows, or Linux).
     Default: 'OSX'
-  
+
 
 Resources:
   PersonTable:
@@ -44,17 +44,17 @@ Resources:
       AttributeDefinitions:
         - AttributeName: Id
           AttributeType: S
-      KeySchema: 
+      KeySchema:
         - AttributeName: Id
           KeyType: HASH
-      ProvisionedThroughput: 
+      ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
 
   Person:
     Type: "AWS::Serverless::Function"
     Properties:
-      Runtime: python3.6
+      Runtime: python3.9
       Handler: Person.lambda_handler
       CodeUri: ./src
       MemorySize: 128
