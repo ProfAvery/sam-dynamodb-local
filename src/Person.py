@@ -16,17 +16,7 @@ def lambda_handler(event, context):
     # Check if executing locally or on AWS, and configure DynamoDB connection accordingly.
     if aws_environment == "AWS_SAM_LOCAL":
         # SAM LOCAL
-        if dev_environment == "OSX":
-            # Environment ins Mac OSX
-            person_table = boto3.resource('dynamodb', endpoint_url="http://docker.for.mac.localhost:8000/").Table(table_name)
-
-        elif dev_environment == "Windows":
-            # Environment is Windows
-            person_table = boto3.resource('dynamodb', endpoint_url="http://docker.for.windows.localhost:8000/").Table(table_name)
-
-        else:
-            # Environment is Linux
-            person_table = boto3.resource('dynamodb', endpoint_url="http://127.0.0.1:8000").Table(table_name)
+        person_table = boto3.resource('dynamodb', endpoint_url="http://host.docker.internal:8000").Table(table_name)
     else:
         # AWS
         person_table = boto3.resource('dynamodb', region_name=region).Table(table_name)
